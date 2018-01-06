@@ -11,7 +11,9 @@
 
 [**VIDEO**](https://player.vimeo.com/video/248628320 "video")
 
-Добро пожаловать! Вы собираетесь отправиться в путешествие, чтобы узнать, как создавать веб-приложения с помощью [Python](https://python.org/ "Python") и микрофреймворка [Flask](http://flask.pocoo.org/ "Flask") . Видео выше даст вам обзор содержимого этого руководства. В этой первой главе вы узнаете, как настроить проект Flask. В конце этой главы у вас будет простое веб-приложение Flask, работающее на вашем компьютере!
+Добро пожаловать! 
+
+``Вы собираетесь отправиться в путешествие, чтобы узнать, как создавать веб-приложения с помощью [Python](https://python.org/ "Python") и микрофреймворка [Flask](http://flask.pocoo.org/ "Flask") . Видео выше даст вам обзор содержимого этого руководства. В этой первой главе вы узнаете, как настроить проект Flask. В конце этой главы у вас будет простое веб-приложение Flask, работающее на вашем компьютере!
 
 Для справки ниже приведен список статей этой серии.
 
@@ -61,7 +63,7 @@
     Type "help", "copyright", "credits" or "license" for more information.
     >>> _
 
-или так:
+или так в cmd  (окно командной строки Microsoft Windows) :
 
     c:\cp>c:\python33\python
     Python 3.3.5 (v3.3.5:62cf4e77f785, Mar  9 2014, 10:37:12) [MSC v.1600 32 bit (In
@@ -69,7 +71,11 @@
     Type "help", "copyright", "credits" or "license" for more information.
     >>>
 
-Интерпретатор Python теперь находится в ожидании пользовательского ввода. В будущих главах вы узнаете, для чего это интерактивное приглашение полезно. Но пока Вы подтвердили, что Python установлен в вашей системе. Чтобы выйти из интерактивного приглашения, вы можете ввести exit () и нажать Enter. В версиях Python для Linux и Mac OS X вы также можете выйти из интерпретатора, нажав Ctrl-D. В Windows, ярлык выхода - Ctrl-Z, затем Enter.
+Интерпретатор Python теперь находится в ожидании пользовательского ввода. В будущих главах вы узнаете, для чего это интерактивное приглашение полезно. Но пока Вы подтвердили, что Python установлен в вашей системе. Чтобы выйти из интерактивного приглашения, вы можете ввести `exit()` и нажать Enter. 
+
+В версиях Python для Linux и Mac OS X вы также можете выйти из интерпретатора, нажав `Ctrl-D`. 
+
+В Windows, ярлык выхода - `Ctrl-Z`, затем Enter.
 
 ## Установка Flask ##
 
@@ -104,6 +110,20 @@
 
     $ virtualenv venv
 
+или так
+
+    $ python virtualenv.py venv
+
+***Прим.переводчика:** У меня установлено несколько версий Python. Я использую Python3.3. В моем случае пришлось вводить строку так:*
+
+    C:\microblog>c:\Python33\python.exe c:\Python33\Lib\site-packages\virtualenv.py venv
+
+*В полученном сообщении видно, что установлен `pip` и ряд пакетов:*
+
+    Using base prefix 'c:\\Python33'
+    New python executable in C:\microblog\venv\Scripts\python.exe
+    Installing setuptools, pip, wheel...done.
+
 Независимо от метода, который вы использовали для его создания, вы создали свою виртуальную среду. Теперь вам нужно сообщить системе, что вы хотите ее использовать, активируя ее. Чтобы активировать новую виртуальную среду, используете следующую команду:
 
     $ source venv/bin/activate
@@ -118,12 +138,53 @@
 
 Теперь, когда вы создали и активировали виртуальную среду, вы можете, наконец, установить в нее Flask:
 
-    (venv) $ pip install flask
 
+    (venv) C:\microblog>pip install flask
+    Collecting flask
+      Using cached Flask-0.12.2-py2.py3-none-any.whl
+    Requirement already satisfied: click>=2.0 in c:\python33\lib\site-packages (from flask)
+    Requirement already satisfied: Werkzeug>=0.7 in c:\python33\lib\site-packages (from flask)
+    Requirement already satisfied: Jinja2>=2.4 in c:\python33\lib\site-packages (from flask)
+    Requirement already satisfied: itsdangerous>=0.21 in c:\python33\lib\site-packages (from flask)
+    Requirement already satisfied: markupsafe in c:\python33\lib\site-packages (from Jinja2>=2.4->flask)
+    Installing collected packages: flask
+    Successfully installed flask-0.12.2
+    
+    (venv) C:\microblog>
 
 Если вы хотите подтвердить, что в вашей виртуальной среде установлен Flask, вы можете запустить интерпретатор Python и импортировать Flask в него:
 
+    (venv) C:\microblog>python
+    Python 3.3.5 (v3.3.5:62cf4e77f785, Mar  9 2014, 10:37:12) [MSC v.1600 32 bit (Intel)] on win32
+    Type "help", "copyright", "credits" or "license" for more information.
     >>> import flask
-    >>> _
+    >>>
 
-Если этот импорт не дает вам никаких ошибок, вы можете поздравить себя, так как Flask установлен и готов к использованию.
+Если этот импорт не дает вам никаких ошибок, вы можете поздравить себя, так как `Flask` установлен и готов к использованию.
+
+
+## Flask приложение «Привет, мир» ##
+
+If you go to the Flask website, you are welcomed with a very simple example application that has just five lines of code. Instead of repeating that trivial example, I'm going to show you a slightly more elaborate one that will give you a good base structure for writing larger applications.
+
+Если вы зайдете на [сайт Flask](http://flask.pocoo.org/), вас приветствует очень простое примерное приложение с пятью строками кода. Вместо того, чтобы повторять этот тривиальный пример, я покажу вам немного более сложный, который даст вам хорошую базовую структуру для написания больших приложений.
+
+Приложение будет существовать в виде пакета. 
+
+***Прим.переводчика:** Пакет - это коллекция модулей.* 
+
+В Python подкаталог, содержащий файл `__init__.py`, считается пакетом и может быть импортирован. Когда вы импортируете пакет, `__init__.py` выполняет и определяет, какие символы предоставляют пакет для внешнего мира.
+
+Давайте создадим пакет под названием `app`, в котором будет размещено приложение. Убедитесь, что вы находитесь в каталоге `microblog`, а затем выполните следующую команду:
+
+    (venv) $ mkdir app
+
+`__init__.py` для пакета приложения будет содержать следующий код:
+
+    from flask import Flask
+    
+    app = Flask(__name__)
+    
+    from app import routes
+
+Сценарий выше просто создает объект приложения как экземпляр класса Flask, импортированного из пакета flask. Переменная `__name__`, переданная в класс Flask, является предопределенной переменной Python, которая задается именем модуля, в котором она используется. Flask использует расположение модуля, переданного здесь как отправную точку, когда ему необходимо загрузить связанные ресурсы, такие как файлы шаблонов, которые я расскажу в главе 2. Для всех практических целей передача `__name__` почти всегда будет настраивать flask в правильном направлении. Затем приложение импортирует модуль `routes`, который еще не существует.
